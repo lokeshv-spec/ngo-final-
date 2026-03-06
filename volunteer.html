@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer - Spandanaforchange</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- HEADER & NAVIGATION -->
+    <header id="header">
+        <nav id="navbar">
+            <a id="logo" href="index.html">Spandanaforchange</a>
+            <button id="mobile-toggle">☰</button>
+            <ul id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="volunteer.html">Volunteer</a></li>
+                <li><a href="transparency.html">Transparency</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <h1 id="hero-title">Become a Volunteer</h1>
+        <p id="hero-subtitle">Join us in making a difference in people's lives</p>
+    </section>
+
+    <!-- VOLUNTEER SECTION -->
+    <section id="volunteer-section">
+        <h2 id="section-title">Register as a Volunteer</h2>
+        <p id="section-subtitle">Help us reach more communities and create lasting impact</p>
+
+        <div style="max-width: 600px; margin: 0 auto;">
+            <!-- Success/Error Messages -->
+            <div id="success-message" style="background-color: #4caf50; color: white; padding: 1rem; border-radius: 4px; display: none; margin-bottom: 1rem;"></div>
+            <div id="error-message" style="background-color: #f44336; color: white; padding: 1rem; border-radius: 4px; display: none; margin-bottom: 1rem;"></div>
+
+            <!-- Registration Form -->
+            <form id="volunteer-form" onsubmit="submitVolunteerForm(event)">
+                <div id="form-group">
+                    <label id="form-label" for="volunteer-name">Full Name *</label>
+                    <input id="form-input" id="volunteer-name" type="text" name="name" required>
+                </div>
+
+                <div id="form-group">
+                    <label id="form-label" for="volunteer-email">Email Address *</label>
+                    <input id="form-input" id="volunteer-email" type="email" name="email" required>
+                </div>
+
+                <div id="form-group">
+                    <label id="form-label" for="volunteer-phone">Phone Number *</label>
+                    <input id="form-input" id="volunteer-phone" type="tel" name="phone" required>
+                </div>
+
+                <div id="form-group">
+                    <label id="form-label" for="volunteer-location">City/Location *</label>
+                    <input id="form-input" id="volunteer-location" type="text" name="location" required>
+                </div>
+
+                <div id="form-group">
+                    <label id="form-label" for="volunteer-skills">Area of Interest *</label>
+                    <select id="form-select" id="volunteer-skills" name="skills" required>
+                        <option value="">Select an area of interest</option>
+                        <option value="education">Education & Training</option>
+                        <option value="women">Women Empowerment</option>
+                        <option value="health">Community Health</option>
+                        <option value="fundraising">Fundraising</option>
+                        <option value="marketing">Marketing & Social Media</option>
+                        <option value="technology">Technology & IT</option>
+                        <option value="logistics">Logistics & Operations</option>
+                        <option value="mentoring">Mentoring & Guidance</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div id="form-group">
+                    <label id="form-label" for="volunteer-experience">Professional Experience/Skills</label>
+                    <textarea id="form-textarea" id="volunteer-experience" name="experience" placeholder="Tell us about your professional background and skills"></textarea>
+                </div>
+
+                <div id="form-group">
+                    <label id="form-label">Availability *</label>
+                    <div style="background-color: #f5f5f5; padding: 1rem; border-radius: 4px;">
+                        <label style="display: block; margin-bottom: 0.5rem;">
+                            <input type="radio" name="availability" value="weekday" required> Weekdays
+                        </label>
+                        <label style="display: block; margin-bottom: 0.5rem;">
+                            <input type="radio" name="availability" value="weekend"> Weekends
+                        </label>
+                        <label style="display: block; margin-bottom: 0;">
+                            <input type="radio" name="availability" value="flexible"> Flexible
+                        </label>
+                    </div>
+                </div>
+
+                <div id="form-group">
+                    <label id="form-label" for="volunteer-motivation">What motivates you to volunteer? *</label>
+                    <textarea id="form-textarea" id="volunteer-motivation" name="motivation" placeholder="Tell us why you want to volunteer with us" required></textarea>
+                </div>
+
+                <div id="form-group">
+                    <label id="form-label">
+                        <input type="checkbox" name="terms" id="volunteer-terms" required> I agree to Spandanaforchange's volunteer code of conduct
+                    </label>
+                </div>
+
+                <button id="form-button" type="submit">Submit Registration</button>
+            </form>
+
+            <!-- Confirmation Message -->
+            <div id="confirmation-message" style="display: none; text-align: center; padding: 2rem; background-color: #E8F5E9; border-radius: 8px;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+                <h3 style="color: #2E7D32; margin-bottom: 1rem;">Welcome to Our Volunteer Community!</h3>
+                <p style="color: #555; margin-bottom: 1rem;">Thank you for registering. We've sent a confirmation email to your registered email address.</p>
+                <p style="color: #666; margin-bottom: 1.5rem;">Our team will review your profile and reach out to you within 2-3 business days with available volunteer opportunities.</p>
+                <button onclick="location.reload()" class="cta-btn">Register Another Volunteer</button>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div style="margin-top: 4rem; padding: 2rem; background-color: #f5f5f5; border-radius: 8px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #00796B; margin-bottom: 2rem; font-size: 1.5rem;">✨ Volunteer Benefits</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <p style="font-weight: bold; color: #00796B; margin-bottom: 0.5rem;">📚 Skill Development</p>
+                    <p style="color: #666; font-size: 0.95rem;">Gain valuable experience and develop new skills in your area of interest.</p>
+                </div>
+                <div>
+                    <p style="font-weight: bold; color: #00796B; margin-bottom: 0.5rem;">🤝 Community Connection</p>
+                    <p style="color: #666; font-size: 0.95rem;">Meet like-minded individuals and build lasting relationships.</p>
+                </div>
+                <div>
+                    <p style="font-weight: bold; color: #00796B; margin-bottom: 0.5rem;">📜 Certificate</p>
+                    <p style="color: #666; font-size: 0.95rem;">Receive volunteer certificates recognizing your contribution.</p>
+                </div>
+                <div>
+                    <p style="font-weight: bold; color: #00796B; margin-bottom: 0.5rem;">🌍 Make Impact</p>
+                    <p style="color: #666; font-size: 0.95rem;">Directly contribute to meaningful social change projects.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div style="margin-top: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #00796B; margin-bottom: 2rem; font-size: 1.5rem;">❓ Frequently Asked Questions</h3>
+            <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                <p style="font-weight: bold; color: #00796B; margin-bottom: 0.5rem;">Do I need any prior experience?</p>
+                <p style="color: #666;">No, we welcome volunteers from all backgrounds. We provide training and support to help you succeed.</p>
+            </div>
+            <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                <p style="font-weight: bold; color: #00796B; margin-bottom: 0.5rem;">How much time commitment is required?</p>
+                <p style="color: #666;">It depends on the volunteer role. Some opportunities require 4-6 hours per week, while others are more flexible.</p>
+            </div>
+            <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                <p style="font-weight: bold; color: #00796B; margin-bottom: 0.5rem;">Can I volunteer remotely?</p>
+                <p style="color: #666;">Yes, we have several remote volunteer positions available in areas like social media management, fundraising, and technology support.</p>
+            </div>
+            <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 8px;">
+                <p style="font-weight: bold; color: #00796B; margin-bottom: 0.5rem;">Is there a minimum duration?</p>
+                <p style="color: #666;">We recommend volunteering for at least 3 months to have meaningful impact, but we're flexible for special projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div id="footer-content">
+            <div>
+                <h3 id="footer-section-title">Spandanaforchange</h3>
+                <p>Working towards a better tomorrow through education, empowerment, and health.</p>
+            </div>
+            <div>
+                <h3 id="footer-section-title">Quick Links</h3>
+                <ul id="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="transparency.html">Transparency</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 id="footer-section-title">Legal</h3>
+                <ul id="footer-links">
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 id="footer-section-title">Follow Us</h3>
+                <div id="social-links">
+                    <a href="https://facebook.com" target="_blank">f</a>
+                    <a href="https://twitter.com" target="_blank">𝕏</a>
+                    <a href="https://instagram.com" target="_blank">📷</a>
+                    <a href="https://linkedin.com" target="_blank">in</a>
+                </div>
+            </div>
+        </div>
+        <div id="footer-bottom">
+            <p>&copy; 2024 Spandanaforchange. All rights reserved. | NGO Reg. No. NGO/2024/001</p>
+        </div>
+    </footer>
+
+    <script src="js/shared.js"></script>
+    <script>
+        function submitVolunteerForm(event) {
+            event.preventDefault();
+
+            // Get form data
+            const name = document.getElementById('volunteer-name').value;
+            const email = document.getElementById('volunteer-email').value;
+            const phone = document.getElementById('volunteer-phone').value;
+            const location = document.getElementById('volunteer-location').value;
+            const skills = document.getElementById('volunteer-skills').value;
+            const experience = document.getElementById('volunteer-experience').value;
+            const availability = document.querySelector('input[name="availability"]:checked').value;
+            const motivation = document.getElementById('volunteer-motivation').value;
+
+            // Validate email
+            if (!validateEmail(email)) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+
+            // Validate phone
+            if (!validatePhone(phone)) {
+                showMessage('Please enter a valid 10-digit phone number', 'error');
+                return;
+            }
+
+            // Save volunteer registration to backend
+            const volunteerData = {
+                name: name,
+                email: email,
+                phone: phone,
+                location: location,
+                skills: skills,
+                experience: experience,
+                availability: availability,
+                motivation: motivation,
+                timestamp: new Date().toISOString()
+            };
+
+            // Store in local storage for now (would send to backend)
+            let volunteers = JSON.parse(localStorage.getItem('volunteers') || '[]');
+            volunteers.push(volunteerData);
+            localStorage.setItem('volunteers', JSON.stringify(volunteers));
+
+            // Hide form and show confirmation
+            document.getElementById('volunteer-form').style.display = 'none';
+            document.getElementById('confirmation-message').style.display = 'block';
+
+            // Scroll to confirmation
+            document.getElementById('confirmation-message').scrollIntoView({ behavior: 'smooth' });
+
+            showMessage('Thank you for registering as a volunteer! We will be in touch soon.', 'success');
+        }
+    </script>
+</body>
+</html>
