@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Spandanaforchange</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        #admin-header {
+            background: linear-gradient(135deg, #00796B 0%, #004d47 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #admin-header h1 {
+            font-size: 1.8rem;
+        }
+
+        #admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        #stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        #stat-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00796B;
+            margin-bottom: 0.5rem;
+        }
+
+        #stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        #tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        #tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        #tab-btn.active {
+            color: #00796B;
+            border-bottom-color: #00796B;
+        }
+
+        #tab-btn:hover {
+            color: #00796B;
+        }
+
+        #tab-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        #tab-content.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        thead {
+            background-color: #f5f5f5;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            font-weight: bold;
+            color: #00796B;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        #action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        #btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #FF9500;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        #btn:hover {
+            background-color: #e68500;
+            transform: translateY(-2px);
+        }
+
+        #btn.secondary {
+            background-color: #00796B;
+        }
+
+        #btn.secondary:hover {
+            background-color: #004d47;
+        }
+
+        #empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        #console {
+            background-color: #1e1e1e;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+
+        .log-line {
+            padding: 0.25rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        #footer-admin {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- ADMIN HEADER -->
+    <header id="admin-header">
+        <h1>📊 Spandanaforchange Admin Dashboard</h1>
+        <p>Manage donations, volunteers, and communications</p>
+    </header>
+
+    <!-- ADMIN CONTAINER -->
+    <div id="admin-container">
+        <!-- STATISTICS -->
+        <div id="stats-grid">
+            <div id="stat-box">
+                <div id="stat-number">0</div>
+                <div id="stat-label">Total Volunteers</div>
+            </div>
+            <div id="stat-box">
+                <div id="stat-number">₹0</div>
+                <div id="stat-label">Total Donations</div>
+            </div>
+            <div id="stat-box">
+                <div id="stat-number">0</div>
+                <div id="stat-label">Contact Forms</div>
+            </div>
+            <div id="stat-box">
+                <div id="stat-number">0</div>
+                <div id="stat-label">Pending Volunteers</div>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div id="action-buttons">
+            <button id="btn" class="secondary" onclick="refreshData()">🔄 Refresh Data</button>
+            <button id="btn" class="secondary" onclick="exportJSON()">📥 Export JSON</button>
+            <button id="btn" class="secondary" onclick="exportCSV()">📥 Export CSV</button>
+            <button id="btn" class="secondary" onclick="clearAllData()">🗑️ Clear All Data</button>
+        </div>
+
+        <!-- TABS -->
+        <div id="tabs">
+            <button id="tab-btn" class="active" onclick="switchTab('volunteers')">Volunteers</button>
+            <button id="tab-btn" onclick="switchTab('donations')">Donations</button>
+            <button id="tab-btn" onclick="switchTab('contacts')">Contact Forms</button>
+            <button id="tab-btn" onclick="switchTab('console')">Console</button>
+        </div>
+
+        <!-- VOLUNTEERS TAB -->
+        <div id="tab-content" class="active">
+            <h2 style="margin-bottom: 1rem; color: #00796B;">Volunteer Registrations</h2>
+            <div id="volunteers-list"></div>
+        </div>
+
+        <!-- DONATIONS TAB -->
+        <div id="tab-content">
+            <h2 style="margin-bottom: 1rem; color: #00796B;">Donation Records</h2>
+            <div id="donations-list"></div>
+        </div>
+
+        <!-- CONTACTS TAB -->
+        <div id="tab-content">
+            <h2 style="margin-bottom: 1rem; color: #00796B;">Contact Form Submissions</h2>
+            <div id="contacts-list"></div>
+        </div>
+
+        <!-- CONSOLE TAB -->
+        <div id="tab-content">
+            <h2 style="margin-bottom: 1rem; color: #00796B;">Developer Console</h2>
+            <div id="console"></div>
+        </div>
+    </div>
+
+    <footer id="footer-admin">
+        <p>&copy; 2024 Spandanaforchange. Admin Dashboard. For authorized use only.</p>
+    </footer>
+
+    <script src="js/backend.js"></script>
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('#tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            const tabs = document.querySelectorAll('#tab-content');
+            const btns = document.querySelectorAll('#tab-btn');
+            
+            const tabIndex = ['volunteers', 'donations', 'contacts', 'console'].indexOf(tabName);
+            if (tabIndex !== -1) {
+                tabs[tabIndex].classList.add('active');
+                btns[tabIndex].classList.add('active');
+            }
+
+            if (tabName === 'volunteers') loadVolunteers();
+            if (tabName === 'donations') loadDonations();
+            if (tabName === 'contacts') loadContacts();
+            if (tabName === 'console') loadConsole();
+        }
+
+        function loadVolunteers() {
+            const volunteers = backend.getVolunteers();
+            const html = volunteers.length > 0 
+                ? `<table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Skills</th>
+                            <th>Status</th>
+                            <th>Registered</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${volunteers.map(v => `
+                            <tr>
+                                <td>${v.name}</td>
+                                <td>${v.email}</td>
+                                <td>${v.phone}</td>
+                                <td>${v.skills}</td>
+                                <td><span style="background: ${v.status === 'approved' ? '#4caf50' : '#ff9800'}; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem;">${v.status}</span></td>
+                                <td>${new Date(v.timestamp).toLocaleDateString()}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>`
+                : '<div id="empty-state">No volunteer registrations yet</div>';
+            document.getElementById('volunteers-list').innerHTML = html;
+            updateStats();
+        }
+
+        function loadDonations() {
+            const donations = backend.getDonations();
+            const html = donations.length > 0 
+                ? `<table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${donations.map(d => `
+                            <tr>
+                                <td>${d.id}</td>
+                                <td>${d.anonymous ? 'Anonymous' : d.name}</td>
+                                <td><strong>₹${d.amount.toLocaleString()}</strong></td>
+                                <td>${d.email}</td>
+                                <td><span style="background: #4caf50; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem;">${d.status}</span></td>
+                                <td>${new Date(d.timestamp).toLocaleDateString()}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>`
+                : '<div id="empty-state">No donations yet</div>';
+            document.getElementById('donations-list').innerHTML = html;
+            updateStats();
+        }
+
+        function loadContacts() {
+            const contacts = backend.getContactSubmissions();
+            const html = contacts.length > 0 
+                ? `<table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Submitted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${contacts.map(c => `
+                            <tr>
+                                <td>${c.name}</td>
+                                <td>${c.email}</td>
+                                <td>${c.subject}</td>
+                                <td><span style="background: ${c.status === 'new' ? '#ff9800' : '#4caf50'}; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem;">${c.status}</span></td>
+                                <td>${new Date(c.submittedAt).toLocaleDateString()}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>`
+                : '<div id="empty-state">No contact submissions yet</div>';
+            document.getElementById('contacts-list').innerHTML = html;
+        }
+
+        function loadConsole() {
+            const stats = backend.getStatistics();
+            const db = backend.getDatabase();
+            const logs = [
+                `[${new Date().toLocaleTimeString()}] Admin Dashboard Loaded`,
+                `[${new Date().toLocaleTimeString()}] Volunteers: ${stats.volunteers.total}`,
+                `[${new Date().toLocaleTimeString()}] Donations: ${stats.donations.total} (₹${stats.donations.totalRaised.toLocaleString()})`,
+                `[${new Date().toLocaleTimeString()}] Contacts: ${stats.contacts.total}`,
+                `[${new Date().toLocaleTimeString()}] Database Size: ${(JSON.stringify(db).length / 1024).toFixed(2)} KB`
+            ];
+            
+            let html = '<div id="console">';
+            logs.forEach(log => {
+                html += `<div class="log-line">${log}</div>`;
+            });
+            html += '</div>';
+            document.querySelector('#tab-content:nth-child(n+4)').innerHTML = `<h2 style="margin-bottom: 1rem; color: #00796B;">Developer Console</h2>${html}`;
+        }
+
+        function updateStats() {
+            const stats = backend.getStatistics();
+            const statBoxes = document.querySelectorAll('#stat-box');
+            
+            statBoxes[0].querySelector('#stat-number').textContent = stats.volunteers.total;
+            
+            const donations = backend.getDonations();
+            const totalDonated = donations.reduce((sum, d) => sum + (d.amount || 0), 0);
+            statBoxes[1].querySelector('#stat-number').textContent = '₹' + totalDonated.toLocaleString();
+            
+            statBoxes[2].querySelector('#stat-number').textContent = stats.contacts.total;
+            statBoxes[3].querySelector('#stat-number').textContent = stats.volunteers.pending;
+        }
+
+        function refreshData() {
+            loadVolunteers();
+            loadDonations();
+            loadContacts();
+            updateStats();
+            alert('✓ Data refreshed from localStorage');
+        }
+
+        function exportJSON() {
+            const data = backend.exportData('json');
+            download(data, 'ngo_database.json', 'application/json');
+        }
+
+        function exportCSV() {
+            const data = backend.exportData('csv');
+            download(data, 'ngo_database.csv', 'text/csv');
+        }
+
+        function download(content, filename, type) {
+            const blob = new Blob([content], { type: type });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function clearAllData() {
+            if (confirm('⚠️ Are you sure? This will permanently delete all data. This cannot be undone.')) {
+                if (confirm('⚠️ This is your final warning. All data will be deleted!')) {
+                    localStorage.removeItem('ngo_database');
+                    backend.initializeDatabase();
+                    refreshData();
+                    alert('✓ All data has been cleared');
+                }
+            }
+        }
+
+        // Initial load
+        window.addEventListener('load', function() {
+            updateStats();
+            loadVolunteers();
+        });
+    </script>
+</body>
+</html>

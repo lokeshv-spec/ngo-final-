@@ -1,0 +1,760 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-teal: #00796B;
+    --dark-teal: #004d47;
+    --light-teal: #4db8a8;
+    --cta-orange: #FF9500;
+    --dark-orange: #e68500;
+    --white: #FFFFFF;
+    --light-gray: #f5f5f5;
+    --dark-gray: #333333;
+    --border-gray: #e0e0e0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--white);
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+/* ========== HEADER & NAVIGATION ========== */
+
+#header {
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-teal);
+    text-decoration: none;
+}
+
+#nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+#nav-links a {
+    text-decoration: none;
+    color: var(--dark-gray);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+#nav-links a:hover {
+    color: var(--primary-teal);
+}
+
+#mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-teal);
+}
+
+/* ========== HERO SECTION ========== */
+
+#hero {
+    background: linear-gradient(135deg, var(--primary-teal) 0%, var(--dark-teal) 100%);
+    color: var(--white);
+    padding: 6rem 2rem;
+    text-align: center;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#hero-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+#hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+#hero-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin-bottom: 2rem;
+}
+
+/* ========== BUTTONS ========== */
+
+#primary-btn, .primary-btn,
+#secondary-btn, .secondary-btn,
+#cta-btn, .cta-btn {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+#primary-btn, .primary-btn {
+    background-color: var(--primary-teal);
+    color: var(--white);
+}
+
+#primary-btn:hover, .primary-btn:hover {
+    background-color: var(--dark-teal);
+    transform: translateY(-2px);
+}
+
+#secondary-btn, .secondary-btn {
+    background-color: transparent;
+    color: var(--primary-teal);
+    border: 2px solid var(--primary-teal);
+}
+
+#secondary-btn:hover, .secondary-btn:hover {
+    background-color: var(--primary-teal);
+    color: var(--white);
+}
+
+#cta-btn, .cta-btn {
+    background-color: var(--cta-orange);
+    color: var(--white);
+}
+
+#cta-btn:hover, .cta-btn:hover {
+    background-color: var(--dark-orange);
+    transform: translateY(-2px);
+}
+
+/* ========== SECTIONS ========== */
+
+#impact-section, #programs-section, #testimonials-section,
+#donation-section, #volunteer-section, #transparency-section,
+#contact-section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#section-title {
+    font-size: 2.5rem;
+    color: var(--primary-teal);
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: bold;
+}
+
+#section-subtitle {
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* ========== IMPACT COUNTERS ========== */
+
+#impact-counters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.impact-card {
+    background: linear-gradient(135deg, var(--light-teal) 0%, var(--primary-teal) 100%);
+    color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 121, 107, 0.2);
+}
+
+.counter-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.counter-label {
+    font-size: 1rem;
+    opacity: 0.95;
+}
+
+/* ========== PROGRAM CARDS ========== */
+
+#programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+#program-card {
+    background: var(--white);
+    border: 2px solid var(--border-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#program-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 121, 107, 0.15);
+    transform: translateY(-5px);
+}
+
+#program-image {
+    width: 100%;
+    height: 200px;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-teal);
+    font-size: 3rem;
+}
+
+#program-content {
+    padding: 1.5rem;
+}
+
+#program-name {
+    font-size: 1.3rem;
+    color: var(--primary-teal);
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+#program-description {
+    color: var(--dark-gray);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+#program-stats {
+    background-color: var(--light-gray);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* ========== DONATION PROGRESS ========== */
+
+#donation-progress-section {
+    background-color: var(--light-gray);
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+#progress-bar-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: var(--border-gray);
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-teal), var(--light-teal));
+    width: 0%;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--white);
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding-right: 0.5rem;
+}
+
+#progress-text {
+    font-size: 1rem;
+    color: var(--dark-gray);
+    margin-top: 1rem;
+}
+
+/* ========== TESTIMONIALS ========== */
+
+#testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+#testimonial-card {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--cta-orange);
+}
+
+#testimonial-text {
+    color: var(--dark-gray);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+#testimonial-author {
+    font-weight: bold;
+    color: var(--primary-teal);
+}
+
+/* ========== CTA BANNER ========== */
+
+#cta-banner {
+    background: linear-gradient(135deg, var(--cta-orange) 0%, #ff7500 100%);
+    color: var(--white);
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+#cta-banner-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+#cta-banner-text {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+/* ========== FORMS ========== */
+
+#contact-form, #donation-form, #volunteer-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+#form-group {
+    margin-bottom: 1.5rem;
+}
+
+#form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-teal);
+    font-weight: 600;
+}
+
+#form-input, #form-textarea, #form-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+#form-input:focus, #form-textarea:focus, #form-select:focus {
+    outline: none;
+    border-color: var(--primary-teal);
+    box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.1);
+}
+
+#form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#form-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--cta-orange);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#form-button:hover {
+    background-color: var(--dark-orange);
+    transform: translateY(-2px);
+}
+
+/* ========== DONATION AMOUNTS ========== */
+
+#donation-amounts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+#amount-btn {
+    padding: 1rem;
+    border: 2px solid var(--border-gray);
+    background-color: var(--white);
+    color: var(--dark-gray);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+#amount-btn:hover, #amount-btn.selected {
+    border-color: var(--cta-orange);
+    background-color: var(--cta-orange);
+    color: var(--white);
+}
+
+/* ========== FOOTER ========== */
+
+#footer {
+    background-color: var(--dark-teal);
+    color: var(--white);
+    padding: 3rem 2rem 1rem;
+}
+
+#footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+}
+
+#footer-section-title {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+#footer-links {
+    list-style: none;
+}
+
+#footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+#footer-links a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#footer-links a:hover {
+    color: var(--cta-orange);
+}
+
+#social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+#social-links a {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+#social-links a:hover {
+    background-color: var(--cta-orange);
+}
+
+#footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+}
+
+/* ========== ABOUT PAGE ========== */
+
+#vision-mission {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+#vm-card {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 8px;
+    border-top: 4px solid var(--primary-teal);
+}
+
+#vm-title {
+    font-size: 1.3rem;
+    color: var(--primary-teal);
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+#timeline {
+    position: relative;
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+#timeline-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+#timeline-marker {
+    width: 30px;
+    height: 30px;
+    background-color: var(--cta-orange);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+#timeline-content {
+    flex-grow: 1;
+}
+
+#timeline-year {
+    font-weight: bold;
+    color: var(--primary-teal);
+    margin-bottom: 0.5rem;
+}
+
+#timeline-event {
+    color: var(--dark-gray);
+}
+
+/* ========== TEAM SECTION ========== */
+
+#team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+#team-member {
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#member-image {
+    width: 100%;
+    height: 200px;
+    background-color: var(--border-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+#member-info {
+    padding: 1.5rem;
+}
+
+#member-name {
+    font-weight: bold;
+    color: var(--primary-teal);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+#member-role {
+    color: var(--dark-gray);
+    font-size: 0.9rem;
+}
+
+/* ========== TRANSPARENCY PAGE ========== */
+
+#transparency-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+#stat-card {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-teal);
+    margin-bottom: 0.5rem;
+}
+
+#stat-label {
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+}
+
+#chart-container {
+    margin-top: 2rem;
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+#chart {
+    display: flex;
+    gap: 1rem;
+    height: 300px;
+    align-items: flex-end;
+}
+
+#chart-bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--primary-teal), var(--light-teal));
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color: var(--white);
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+/* ========== CONFIRMATION MESSAGES ========== */
+
+#success-message {
+    background-color: #4caf50;
+    color: var(--white);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+#error-message {
+    background-color: #f44336;
+    color: var(--white);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+@media (max-width: 768px) {
+    #hero-title {
+        font-size: 2rem;
+    }
+
+    #nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: var(--white);
+        gap: 0;
+    }
+
+    #nav-links.active {
+        display: flex;
+    }
+
+    #nav-links a {
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--border-gray);
+    }
+
+    #mobile-toggle {
+        display: block;
+    }
+
+    #section-title {
+        font-size: 2rem;
+    }
+
+    #impact-counters {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #programs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #donation-amounts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    #navbar {
+        padding: 1rem;
+    }
+
+    #hero {
+        padding: 3rem 1rem;
+    }
+
+    #hero-title {
+        font-size: 1.5rem;
+    }
+
+    #section-title {
+        font-size: 1.5rem;
+    }
+
+    #impact-counters {
+        grid-template-columns: 1fr;
+    }
+
+    #donation-amounts {
+        grid-template-columns: 1fr;
+    }
+}
