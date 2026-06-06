@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHARATH NAVA YUVA ASSOCIATION - Empowering Lives Through Action</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="loading-active">
+    <!-- LOADING INTRO -->
+    <div id="loading-spinner" class="loading-spinner">
+        <div class="spinner-content">
+            <p class="loader-kicker">There are 2 worlds</p>
+            <div class="loader-sides" aria-hidden="true">
+                <span class="loader-side">Ours</span>
+                <span class="loader-side">Theirs</span>
+            </div>
+            <p class="loader-message">We work to bridge theirs with ours.</p>
+            <div class="loader-progress" aria-hidden="true"></div>
+        </div>
+    </div>
+
+    <!-- BEL CUP POPUP -->
+    <div id="event-popup" class="event-popup" aria-hidden="true">
+        <div class="event-popup-dialog" role="dialog" aria-modal="true" aria-labelledby="event-popup-title">
+            <button type="button" id="event-popup-close" class="event-popup-close" aria-label="Close event popup">&times;</button>
+            <div class="event-popup-media">
+                <img src="assets/bel-cup-2026.jpeg" alt="BEL Cup 2026 Badminton Tournament poster">
+            </div>
+            <div id="event-registration-panel" class="event-popup-content" aria-hidden="true">
+                <p class="event-popup-kicker">Registration Open</p>
+                <h2 id="event-popup-title">BEL Cup 2026 Badminton Tournament</h2>
+                <p class="event-popup-meta">21 June | Benaka Sports Line</p>
+
+                <form id="event-registration-form">
+                    <div class="event-form-grid">
+                        <div class="event-form-group">
+                            <label for="event-name">Full Name *</label>
+                            <input id="event-name" class="form-input" type="text" name="name" required>
+                        </div>
+                        <div class="event-form-group">
+                            <label for="event-phone">Phone Number *</label>
+                            <input id="event-phone" class="form-input" type="tel" name="phone" required>
+                        </div>
+                        <div class="event-form-group">
+                            <label for="event-age">Age *</label>
+                            <input id="event-age" class="form-input" type="number" name="age" min="15" max="80" required>
+                        </div>
+                        <div class="event-form-group">
+                            <label for="event-gender">Gender *</label>
+                            <select id="event-gender" class="form-select" name="gender" required>
+                                <option value="">Select</option>
+                                <option value="Men">Men</option>
+                                <option value="Women">Women</option>
+                            </select>
+                        </div>
+                        <div class="event-form-group">
+                            <label for="event-category">Category *</label>
+                            <select id="event-category" class="form-select" name="category" required>
+                                <option value="">Select</option>
+                                <option value="Singles">Singles - Rs. 300</option>
+                                <option value="Doubles">Doubles - Rs. 500</option>
+                            </select>
+                        </div>
+                        <div class="event-form-group">
+                            <label for="event-partner">Partner Name</label>
+                            <input id="event-partner" class="form-input" type="text" name="partner" placeholder="For doubles">
+                        </div>
+                    </div>
+                    <button type="submit" class="cta-btn event-submit-btn">Register Now</button>
+                    <p id="event-form-message" class="event-form-message" aria-live="polite"></p>
+                </form>
+            </div>
+            <div class="event-popup-actions">
+                <button type="button" id="event-register-toggle" class="cta-btn event-register-toggle">Register Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER & NAVIGATION -->
+    <header id="header">
+
+        <nav id="navbar">
+            <a id="logo" href="#" onclick="navigateTo('index'); return false;">BHARATH NAVA YUVA</a>
+            <button id="mobile-toggle">☰</button>
+            <ul id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="#events-section">Events</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="volunteer.html">Volunteer</a></li>
+                <li><a href="transparency.html">Transparency</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+                <nav id="navbar1">
+          <marquee> Important update: BHARATH NAVA YUVA ASSOCIATION started in 2026 | Upcoming event: BEL Cup 2026 - 21 June | Benaka Sports Line | Register: <a href="https://belcup.netlify.app/" target="_blank" rel="noopener">belcup.netlify.app</a> </marquee>  
+        </nav>
+    </header>
+
+    <!-- HERO SECTION WITH INTRO (SHAKTI STYLE) -->
+    <section id="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <!-- TAGLINE -->
+            <div class="hero-tagline-text">Empowering Youth for Positive Change:</div>
+            
+            <!-- MAIN HEADING WITH SPACED LETTERS -->
+            <h1 id="hero-title" class="hero-title-spaced">
+                <span class="title-line">Building a Better</span>
+                <span class="title-line">India Together</span>
+            </h1>
+
+            <!-- PLAY VIDEO & INFO -->
+            <div class="hero-bottom">
+                <div class="hero-video-button">
+                    <a href="https://www.youtube.com/watch?v=example" class="video-play-btn" target="_blank">
+                        <span class="play-icon">▶</span>
+                    </a>
+                    <span class="video-text">Play Video</span>
+                </div>
+                <div class="hero-info">
+                    A newly started not-for-profit organization launched in 2026
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRESENT EVENTS -->
+    <section id="events-section">
+        <h2 id="section-title">Upcoming Events</h2>
+        <p class="section-intro">Join our first community activities and youth programs</p>
+        <div class="current-event-card">
+            <div class="current-event-poster">
+                <img src="assets/bel-cup-2026.jpeg" alt="BEL Cup 2026 Badminton Tournament poster">
+            </div>
+            <div class="current-event-content">
+                <p class="event-status">Upcoming Event</p>
+                <h3>BEL Cup 2026</h3>
+                <p>Badminton tournament with men's and women's singles and doubles categories.</p>
+                <div class="current-event-details">
+                    <span>21 June</span>
+                    <span>Benaka Sports Line</span>
+                    <span>Singles Rs. 300 | Doubles Rs. 500</span>
+                </div>
+                <a href="https://belcup.netlify.app/" target="_blank" rel="noopener" class="cta-btn">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION STATEMENT SECTION -->
+    <section id="mission-intro-section">
+        <div class="mission-intro-content">
+            <p class="mission-intro-text">
+                We aim to empower <em>youth</em> and <em>communities</em> to inspire them to overcome obstacles
+                in their lives. We focus on <em>education & skill development</em>,
+                <em>youth empowerment</em>, <em>community health</em>, and creating sustainable
+                pathways to <em>socio-economic development</em>.
+            </p>
+            <a href="about.html" class="download-brochure">Download Brochure</a>
+        </div>
+    </section>
+
+    <!-- STORY SECTIONS -->
+    <section id="journey-section">
+        <div class="journey-content">
+            <h2>Our Journey</h2>
+            <div class="story-grid">
+                <div class="story-card">
+                    <div class="story-number">1</div>
+                    <h3>Identifying the Need</h3>
+                    <p>We recognized that India's youth and communities needed direct support—through education, skills training, and meaningful opportunities for personal and social development.</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-number">2</div>
+                    <h3>Building the Movement</h3>
+                    <p>Our dedicated team of volunteers and professionals came together with a single mission: to help people achieve their potential and contribute positively to society.</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-number">3</div>
+                    <h3>Creating Impact</h3>
+                    <p>Through grassroots programs and community engagement, we've begun transforming lives across multiple sectors—from education to livelihood to community health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACT COUNTERS -->
+    <section id="impact-section">
+        <h2>Our 2026 Launch Goals</h2>
+        <div id="impact-counters">
+            <div class="impact-card">
+                <div class="counter-number" data-target="1000">0</div>
+                <div class="counter-label">Lives to Reach</div>
+            </div>
+            <div class="impact-card">
+                <div class="counter-number" data-target="300">0</div>
+                <div class="counter-label">Youth to Support</div>
+            </div>
+            <div class="impact-card">
+                <div class="counter-number" data-target="500">0</div>
+                <div class="counter-label">Beneficiaries to Serve</div>
+            </div>
+            <div class="impact-card">
+                <div class="counter-number" data-target="10">0</div>
+                <div class="counter-label">Communities to Reach</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMS PREVIEW -->
+    <section id="programs-section">
+        <h2>Our Core Programs</h2>
+        <p class="section-intro">Helping people through focused, impactful initiatives</p>
+        <div id="programs-grid">
+            <div id="program-card">
+                <div class="program-image">🎓</div>
+                <div id="program-content">
+                    <h3 id="program-name">Education & Skill Development</h3>
+                    <p id="program-description">Providing scholarships, vocational training, and digital literacy programs to underprivileged youth.</p>
+                    <div id="program-stats">Launching in 2026</div>
+                </div>
+            </div>
+
+            <div id="program-card">
+                <div class="program-image">💪</div>
+                <div id="program-content">
+                    <h3 id="program-name">Youth Empowerment</h3>
+                    <p id="program-description">Leadership programs, mentorship, and entrepreneurship support to transform young lives.</p>
+                    <div id="program-stats">Founding batches planned</div>
+                </div>
+            </div>
+
+            <div id="program-card">
+                <div class="program-image">🏥</div>
+                <div id="program-content">
+                    <h3 id="program-name">Community Health & Wellness</h3>
+                    <p id="program-description">Healthcare awareness, medical camps, and wellness programs for underserved communities.</p>
+                    <div id="program-stats">First camps planned</div>
+                </div>
+            </div>
+        </div>
+        <button onclick="navigateTo('programs')" class="cta-btn primary" style="margin-top: 2rem; display: block; margin-left: auto; margin-right: auto;">View All Programs</button>
+    </section>
+
+    <!-- DONATION PROGRESS -->
+    <section id="donation-progress-section">
+        <h2 id="section-title">Help Us Reach More People</h2>
+        <p id="section-subtitle">Join our 2026 launch mission to create meaningful change in communities across India</p>
+        <div id="progress-bar-container">
+            <div id="progress-bar-fill" style="width: 5%;">5%</div>
+        </div>
+        <p id="progress-text">Launch fundraising has started toward our ₹50,00,000 goal</p>
+        <button onclick="navigateTo('donate')" class="cta-btn primary">Contribute Today</button>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials-section">
+        <h2 id="section-title">What We Are Building</h2>
+        <p class="section-intro">Our first programs are designed around clear community needs</p>
+        <div id="testimonials-grid">
+            <div id="testimonial-card">
+                <p id="testimonial-text">"We are preparing programs that help young people access skills, mentorship, and confidence to build better futures."</p>
+                <p id="testimonial-author">- 2026 Youth Empowerment Focus</p>
+            </div>
+            <div id="testimonial-card">
+                <p id="testimonial-text">"Our upcoming health activities will focus on awareness, preventive care, and accessible community support."</p>
+                <p id="testimonial-author">- 2026 Community Health Focus</p>
+            </div>
+            <div id="testimonial-card">
+                <p id="testimonial-text">"Education support will begin with learning materials, mentorship, and opportunities for students who need encouragement."</p>
+                <p id="testimonial-author">- 2026 Education Focus</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section id="cta-banner">
+        <h2 id="cta-banner-title">Be Part of the Change</h2>
+        <p id="cta-banner-text">Every contribution helps us reach more people and create lasting positive change. Whether you donate, volunteer, or share our mission, you make a difference.</p>
+        <button onclick="navigateTo('donate')" style="background-color: white; color: #FF9500; font-weight: bold; padding: 0.75rem 2rem; border: none; border-radius: 4px; cursor: pointer;">Donate Now</button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div id="footer-content">
+            <div>
+                <h3 id="footer-section-title">BHARATH NAVA YUVA ASSOCIATION</h3>
+                <p>Dedicated to helping people and creating meaningful social change through youth empowerment, education, and community development.</p>
+            </div>
+            <div>
+                <h3 id="footer-section-title">Quick Links</h3>
+                <ul id="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="transparency.html">Transparency</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 id="footer-section-title">Legal</h3>
+                <ul id="footer-links">
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="refund.html">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 id="footer-section-title">Connect With Us</h3>
+                <div id="social-links">
+                    <a href="https://facebook.com" target="_blank">f</a>
+                    <a href="https://twitter.com" target="_blank">𝕏</a>
+                    <a href="https://www.instagram.com/bnya_ngo_official?igsh=MWdobWEyMHA1c2l6ag==" target="_blank" rel="noopener">📷</a>
+                    <a href="https://www.linkedin.com/company/bharath-nava-yuva-association/" target="_blank" rel="noopener">in</a>
+                </div>
+            </div>
+        </div>
+        <div id="footer-bottom">
+            <p>&copy; 2026 BHARATH NAVA YUVA ASSOCIATION. All rights reserved. | Started in 2026</p>
+        </div>
+    </footer>
+
+    <script src="js/shared.js"></script>
+    
+</body>
+</html>

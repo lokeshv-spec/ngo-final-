@@ -14,6 +14,7 @@ class Backend {
                 volunteers: [],
                 donations: [],
                 contacts: [],
+                eventRegistrations: [],
                 settings: {
                     totalRaised: 3250000,
                     totalBeneficiaries: 15000,
@@ -24,7 +25,17 @@ class Backend {
     }
 
     getDatabase() {
-        return JSON.parse(localStorage.getItem('ngo_database') || '{}');
+        const db = JSON.parse(localStorage.getItem('ngo_database') || '{}');
+        db.volunteers = db.volunteers || [];
+        db.donations = db.donations || [];
+        db.contacts = db.contacts || [];
+        db.eventRegistrations = db.eventRegistrations || [];
+        db.settings = db.settings || {
+            totalRaised: 3250000,
+            totalBeneficiaries: 15000,
+            totalPrograms: 3
+        };
+        return db;
     }
 
     saveDatabase(data) {
@@ -162,6 +173,25 @@ class Backend {
         return null;
     }
 
+    // ========== EVENT REGISTRATION MANAGEMENT ==========
+    registerEventParticipant(registrationData) {
+        const db = this.getDatabase();
+        const registration = {
+            id: 'BEL' + Date.now().toString(),
+            ...registrationData,
+            eventName: registrationData.eventName || 'BEL Cup 2026 Badminton Tournament',
+            registeredAt: new Date().toISOString()
+        };
+        db.eventRegistrations.push(registration);
+        this.saveDatabase(db);
+        return registration;
+    }
+
+    getEventRegistrations() {
+        const db = this.getDatabase();
+        return db.eventRegistrations || [];
+    }
+
     // ========== STATISTICS ==========
     getStatistics() {
         const db = this.getDatabase();
@@ -178,6 +208,9 @@ class Backend {
             contacts: {
                 total: (db.contacts || []).length,
                 unresolved: (db.contacts || []).filter(c => c.status === 'new').length
+            },
+            eventRegistrations: {
+                total: (db.eventRegistrations || []).length
             }
         };
     }
@@ -187,15 +220,15 @@ class Backend {
         const templates = {
             volunteer_confirmation: {
                 subject: 'Thank You for Registering as a Volunteer',
-                body: `Dear ${data.name},\n\nThank you for registering as a volunteer with Spandanaforchange. We're excited to have you join our community.\n\nWe will review your profile and contact you within 2-3 business days with available opportunities.\n\nBest regards,\nSpandanaforchange Team`
+                body: `Dear ${data.name},\n\nThank you for registering as a volunteer with BHARATH NAVA YUVA ASSOCIATION. We're excited to have you join our community.\n\nWe will review your profile and contact you within 2-3 business days with available opportunities.\n\nBest regards,\nBHARATH NAVA YUVA ASSOCIATION Team`
             },
             donation_confirmation: {
-                subject: 'Donation Receipt - Spandanaforchange',
-                body: `Dear ${data.name},\n\nThank you for your generous donation of ₹${data.amount}. Your contribution will help us create lasting impact.\n\nTransaction ID: ${data.id}\nDate: ${new Date(data.timestamp).toLocaleDateString()}\n\nBest regards,\nSpandanaforchange Team`
+                subject: 'Donation Receipt - BHARATH NAVA YUVA ASSOCIATION',
+                body: `Dear ${data.name},\n\nThank you for your generous donation of ₹${data.amount}. Your contribution will help us create lasting impact.\n\nTransaction ID: ${data.id}\nDate: ${new Date(data.timestamp).toLocaleDateString()}\n\nBest regards,\nBHARATH NAVA YUVA ASSOCIATION Team`
             },
             contact_acknowledgment: {
                 subject: 'We Received Your Message',
-                body: `Dear ${data.name},\n\nThank you for contacting Spandanaforchange. We have received your message and will respond within 24-48 hours.\n\nBest regards,\nSpandanaforchange Team`
+                body: `Dear ${data.name},\n\nThank you for contacting BHARATH NAVA YUVA ASSOCIATION. We have received your message and will respond within 24-48 hours.\n\nBest regards,\nBHARATH NAVA YUVA ASSOCIATION Team`
             }
         };
         return templates[type] || null;
@@ -232,6 +265,12 @@ class Backend {
         data.contacts.forEach(c => {
             csv += `"${c.name}","${c.email}","${c.subject}","${c.status}","${c.submittedAt}"\n`;
         });
+
+        csv += '\n=== BEL CUP REGISTRATIONS ===\n';
+        csv += 'Name,Phone,Age,Gender,Category,Partner,Registered\n';
+        data.eventRegistrations.forEach(r => {
+            csv += `"${r.name}","${r.phone}","${r.age}","${r.gender}","${r.category}","${r.partner || ''}","${r.registeredAt}"\n`;
+        });
         
         return csv;
     }
@@ -248,7 +287,8 @@ const API = {
     POST: {
         '/api/volunteers': (data) => backend.registerVolunteer(data),
         '/api/donations': (data) => backend.recordDonation(data),
-        '/api/contacts': (data) => backend.recordContactSubmission(data)
+        '/api/contacts': (data) => backend.recordContactSubmission(data),
+        '/api/event-registrations': (data) => backend.registerEventParticipant(data)
     },
     
     // Volunteer endpoints
@@ -256,6 +296,7 @@ const API = {
         '/api/volunteers': () => backend.getVolunteers(),
         '/api/donations': () => backend.getDonations(),
         '/api/contacts': () => backend.getContactSubmissions(),
+        '/api/event-registrations': () => backend.getEventRegistrations(),
         '/api/statistics': () => backend.getStatistics(),
         '/api/export/json': () => backend.exportData('json'),
         '/api/export/csv': () => backend.exportData('csv')
