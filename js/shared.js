@@ -261,6 +261,98 @@ function initCounters() {
     counters.forEach(counter => observer.observe(counter));
 }
 
+function renderEventGallery(files) {
+    const gallery = document.getElementById('event-photos-grid');
+    if (!gallery) {
+        return;
+    }
+
+    gallery.innerHTML = '';
+    if (!files || !files.length) {
+        gallery.innerHTML = '<div class="event-empty-message">No event photos have been uploaded yet.</div>';
+        return;
+    }
+
+    files.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'event-photo-card';
+
+        const img = document.createElement('img');
+        img.alt = item.name || 'Event photo';
+        if (item.src) {
+            img.src = item.src;
+        } else if (item instanceof File) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(item);
+        }
+
+        const caption = document.createElement('div');
+        caption.className = 'event-photo-caption';
+        caption.textContent = item.name || item.id || 'Event photo';
+
+        card.appendChild(img);
+        card.appendChild(caption);
+        gallery.appendChild(card);
+    });
+}
+
+function initEventGallery() {
+    const uploadInput = document.getElementById('event-upload-input');
+    const clearButton = document.getElementById('event-clear-btn');
+    const gallery = document.getElementById('event-photos-grid');
+    if (!uploadInput || !clearButton || !gallery) {
+        if (!gallery) {
+            return;
+        }
+        renderEventGallery(backend.getEventPhotos());
+        return;
+    }
+
+    const selectedPhotos = [];
+
+    function saveSelectedPhotos(files) {
+        const validFiles = Array.from(files).filter(file => file.type.startsWith('image/'));
+        if (!validFiles.length) {
+            return;
+        }
+
+        Promise.all(validFiles.map(file => new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                resolve({
+                    name: file.name,
+                    src: event.target.result
+                });
+            };
+            reader.readAsDataURL(file);
+        }))).then(photoItems => {
+            photoItems.forEach(photo => backend.addEventPhoto(photo));
+            renderEventGallery(backend.getEventPhotos());
+        });
+    }
+
+    uploadInput.addEventListener('change', function(event) {
+        const files = event.target.files;
+        if (!files || !files.length) {
+            return;
+        }
+        saveSelectedPhotos(files);
+        uploadInput.value = '';
+    });
+
+    clearButton.addEventListener('click', function() {
+        if (confirm('Clear all uploaded event photos?')) {
+            backend.clearEventPhotos();
+            renderEventGallery(backend.getEventPhotos());
+        }
+    });
+
+    renderEventGallery(backend.getEventPhotos());
+}
+
 // Form validation
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -298,5 +390,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initReloadHeroScroll();
     initMobileMenu();
     initSmoothScroll();
+    initEventGallery();
     initCounters();
 });

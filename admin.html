@@ -306,6 +306,7 @@
             <button id="tab-btn" onclick="switchTab('donations')">Donations</button>
             <button id="tab-btn" onclick="switchTab('contacts')">Contact Forms</button>
             <button id="tab-btn" onclick="switchTab('events')">BEL Cup</button>
+            <button id="tab-btn" onclick="switchTab('eventPhotos')">Event Photos</button>
             <button id="tab-btn" onclick="switchTab('console')">Console</button>
         </div>
 
@@ -331,6 +332,19 @@
         <div id="tab-content">
             <h2 style="margin-bottom: 1rem; color: #00796B;">BEL Cup Registrations</h2>
             <div id="events-list"></div>
+        </div>
+
+        <!-- EVENT PHOTOS TAB -->
+        <div id="tab-content">
+            <h2 style="margin-bottom: 1rem; color: #00796B;">Event Photo Upload</h2>
+            <div id="photo-upload-panel" style="display: grid; gap: 1rem; margin-bottom: 1.5rem;">
+                <input type="file" id="event-photo-input" accept="image/*" multiple style="padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc;" />
+                <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                    <button id="btn" class="secondary" type="button" onclick="uploadEventPhotos()">Upload Selected Photos</button>
+                    <button id="btn" class="secondary" type="button" onclick="clearEventPhotos()">Clear All Event Photos</button>
+                </div>
+            </div>
+            <div id="event-photos-admin-list"></div>
         </div>
 
         <!-- CONSOLE TAB -->
@@ -359,7 +373,7 @@
             const tabs = document.querySelectorAll('#tab-content');
             const btns = document.querySelectorAll('#tab-btn');
             
-            const tabIndex = ['volunteers', 'donations', 'contacts', 'events', 'console'].indexOf(tabName);
+            const tabIndex = ['volunteers', 'donations', 'contacts', 'events', 'eventPhotos', 'console'].indexOf(tabName);
             if (tabIndex !== -1) {
                 tabs[tabIndex].classList.add('active');
                 btns[tabIndex].classList.add('active');
@@ -369,6 +383,7 @@
             if (tabName === 'donations') loadDonations();
             if (tabName === 'contacts') loadContacts();
             if (tabName === 'events') loadEventRegistrations();
+            if (tabName === 'eventPhotos') loadEventPhotos();
             if (tabName === 'console') loadConsole();
         }
 
@@ -499,6 +514,56 @@
             updateStats();
         }
 
+        function loadEventPhotos() {
+            const photos = backend.getEventPhotos();
+            const html = photos.length > 0
+                ? `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+                        ${photos.map(photo => `
+                            <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08);">
+                                <img src="${photo.src}" alt="${photo.name}" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+                                <div style="padding: 0.9rem; font-size: 0.95rem; color: #333;">${photo.name}</div>
+                            </div>
+                        `).join('')}
+                   </div>`
+                : '<div id="empty-state">No event photos uploaded yet.</div>';
+            document.getElementById('event-photos-admin-list').innerHTML = html;
+        }
+
+        function uploadEventPhotos() {
+            const input = document.getElementById('event-photo-input');
+            const files = input.files;
+            if (!files || !files.length) {
+                alert('Please select one or more images first.');
+                return;
+            }
+
+            const validFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+            if (!validFiles.length) {
+                alert('Only image files are allowed.');
+                return;
+            }
+
+            Promise.all(validFiles.map(file => new Promise(resolve => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    resolve({ name: file.name, src: event.target.result });
+                };
+                reader.readAsDataURL(file);
+            }))).then(photoItems => {
+                photoItems.forEach(photo => backend.addEventPhoto(photo));
+                input.value = '';
+                loadEventPhotos();
+                alert('Event photos uploaded successfully.');
+            });
+        }
+
+        function clearEventPhotos() {
+            if (confirm('Delete all event photos uploaded by admin?')) {
+                backend.clearEventPhotos();
+                loadEventPhotos();
+            }
+        }
+
         function loadConsole() {
             const stats = backend.getStatistics();
             const db = backend.getDatabase();
@@ -580,6 +645,7 @@
         window.addEventListener('load', function() {
             updateStats();
             loadVolunteers();
+            loadEventPhotos();
         });
     </script>
 </body>

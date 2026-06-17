@@ -10,15 +10,18 @@
     <!-- HEADER & NAVIGATION -->
     <header id="header">
         <nav id="navbar">
-            <a id="logo" href="index.html">BHARATH NAVA YUVA</a>
+            <a id="logo" href="index.html">
+                <img src="logo-removebg-preview.png" alt="Bharath Nava Yuva Association logo" class="header-logo">
+                <span class="logo-text">BHARATH NAVA YUVA</span>
+            </a>
             <button id="mobile-toggle">☰</button>
             <ul id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="programs.html">Programs</a></li>
+                 <li><a href="./gallery.html">Gallery</a></li>
                 <li><a href="donate.html">Donate</a></li>
                 <li><a href="volunteer.html">Volunteer</a></li>
-                <li><a href="transparency.html">Transparency</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -26,6 +29,11 @@
 
     <!-- HERO SECTION -->
     <section id="hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+            <source src="hero-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-background"></div>
         <h1 id="hero-title">About BHARATH NAVA YUVA ASSOCIATION</h1>
         <p id="hero-subtitle">Understanding our mission and impact</p>
     </section>
@@ -136,42 +144,86 @@
         </div>
     </section>
 
-    <!-- TEAM SECTION -->
-    <section id="impact-section">
-        <h2 id="section-title">Our Leadership Team</h2>
-        <div id="team-grid">
-            <div id="team-member">
-                <div id="member-image">👨‍💼</div>
-                <div id="member-info">
-                    <p id="member-name">Founding Team</p>
-                    <p id="member-role">Leadership & Coordination</p>
-                </div>
-            </div>
-            <div id="team-member">
-                <div id="member-image">👩‍💼</div>
-                <div id="member-info">
-                    <p id="member-name">Volunteer Team</p>
-                    <p id="member-role">Programs & Events</p>
-                </div>
-            </div>
-            <div id="team-member">
-                <div id="member-image">👨‍💼</div>
-                <div id="member-info">
-                    <p id="member-name">Compliance Team</p>
-                    <p id="member-role">Finance & Records</p>
-                </div>
-            </div>
-            <div id="team-member">
-                <div id="member-image">👩‍💼</div>
-                <div id="member-info">
-                    <p id="member-name">Outreach Team</p>
-                    <p id="member-role">Community Partnerships</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- TEAM SECTION -->
+        <section id="team-section" class="team-section">
+                <section id="team-section" class="team-section">
+                    <div class="team-header">
+                        <h2 class="section-heading">Our Team</h2>
+                        <p class="section-intro">A small group of committed volunteers and office bearers driving our mission forward.</p>
+                    </div>
 
-    <!-- FOOTER -->
+                    <div class="team-layout">
+                        <div class="team-grid">
+                            <div class="team-member">
+                                <div class="member-photo"><img src="https://via.placeholder.com/300x400.png?text=Harisha" alt="Harisha"></div>
+                                <div class="member-info">
+                                    <div class="member-name">Shri Harisha N</div>
+                                    <div class="member-role">Honorary President</div>
+                                    <div class="member-bio">Founding member focused on community outreach and partnerships.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-member">
+                                <div class="member-photo"><img src="https://via.placeholder.com/300x400.png?text=Kushal" alt="Kushal"></div>
+                                <div class="member-info">
+                                    <div class="member-name">Shri Kushal Maane</div>
+                                    <div class="member-role">President</div>
+                                    <div class="member-bio">Leads strategy and program design for educational initiatives.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-member">
+                                <div class="member-photo"><img src="https://via.placeholder.com/300x400.png?text=Chitrag" alt="Chitrag"></div>
+                                <div class="member-info">
+                                    <div class="member-name">Shri Chitrag R</div>
+                                    <div class="member-role">Secretary</div>
+                                    <div class="member-bio">Handles coordination, registrations, and volunteer communications.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-member">
+                                <div class="member-photo"><img src="https://via.placeholder.com/300x400.png?text=Renuka" alt="Renuka"></div>
+                                <div class="member-info">
+                                    <div class="member-name">Shri Renuka Prasad V</div>
+                                    <div class="member-role">Treasurer</div>
+                                    <div class="member-bio">Manages funds transparently and oversees donation processes.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-member">
+                                <div class="member-photo"><img src="https://via.placeholder.com/300x400.png?text=Samprith" alt="Samprith"></div>
+                                <div class="member-info">
+                                    <div class="member-name">Shri Samprith P</div>
+                                    <div class="member-role">Vice President</div>
+                                    <div class="member-bio">Supports program expansion and community events.</div>
+                                </div>
+                            </div>
+
+                            <div class="team-member">
+                                <div class="member-photo"><img src="https://via.placeholder.com/300x400.png?text=Balakrishna" alt="Balakrishna"></div>
+                                <div class="member-info">
+                                    <div class="member-name">Shri Balakrishna L</div>
+                                    <div class="member-role">Joint Secretary</div>
+                                    <div class="member-bio">Coordinates logistics and volunteer training.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <aside class="board-column">
+                            <h3 style="margin-top:0; color:var(--primary-teal);">Board of Directors</h3>
+                            <div class="board-list">
+                                <div class="board-item"><div class="board-avatar"><img src="https://via.placeholder.com/80.png?text=L" alt="Lokesh"></div><div class="board-name">Shri Lokesh V</div></div>
+                                <div class="board-item"><div class="board-avatar"><img src="https://via.placeholder.com/80.png?text=R" alt="Rohith"></div><div class="board-name">Shri Rohith N</div></div>
+                                <div class="board-item"><div class="board-avatar"><img src="https://via.placeholder.com/80.png?text=M" alt="Mallik"></div><div class="board-name">Shri Mallik Gowda M</div></div>
+                                <div class="board-item"><div class="board-avatar"><img src="https://via.placeholder.com/80.png?text=R" alt="RohithK"></div><div class="board-name">Shri Rohith Kumar V</div></div>
+                                <div class="board-item"><div class="board-avatar"><img src="https://via.placeholder.com/80.png?text=A" alt="Akshay"></div><div class="board-name">Shri Akshay Kumar N</div></div>
+                                <div class="board-item"><div class="board-avatar"><img src="https://via.placeholder.com/80.png?text=P" alt="Pavan"></div><div class="board-name">Shri Pavan Kumar K</div></div>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+                
+<!-- FOOTER -->
     <footer id="footer">
         <div id="footer-content">
             <div>

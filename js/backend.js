@@ -15,6 +15,7 @@ class Backend {
                 donations: [],
                 contacts: [],
                 eventRegistrations: [],
+                eventPhotos: [],
                 settings: {
                     totalRaised: 3250000,
                     totalBeneficiaries: 15000,
@@ -30,6 +31,7 @@ class Backend {
         db.donations = db.donations || [];
         db.contacts = db.contacts || [];
         db.eventRegistrations = db.eventRegistrations || [];
+        db.eventPhotos = db.eventPhotos || [];
         db.settings = db.settings || {
             totalRaised: 3250000,
             totalBeneficiaries: 15000,
@@ -190,6 +192,51 @@ class Backend {
     getEventRegistrations() {
         const db = this.getDatabase();
         return db.eventRegistrations || [];
+    }
+
+    addEventPhoto(photoData) {
+        const db = this.getDatabase();
+        db.eventPhotos = db.eventPhotos || [];
+        const photo = {
+            id: 'PHOTO' + Date.now().toString(),
+            name: photoData.name,
+            src: photoData.src,
+            uploadedAt: new Date().toISOString()
+        };
+        db.eventPhotos.push(photo);
+        this.saveDatabase(db);
+        return photo;
+    }
+
+    getEventPhotos() {
+        const db = this.getDatabase();
+        const photos = db.eventPhotos || [];
+        if (photos.length === 0) {
+            return [
+                {
+                    id: 'DEMO1',
+                    name: 'Community Workshop',
+                    src: 'https://via.placeholder.com/760x520.png?text=Community+Workshop'
+                },
+                {
+                    id: 'DEMO2',
+                    name: 'Volunteer Outreach',
+                    src: 'https://via.placeholder.com/760x520.png?text=Volunteer+Outreach'
+                },
+                {
+                    id: 'DEMO3',
+                    name: 'Local Celebration',
+                    src: 'https://via.placeholder.com/760x520.png?text=Local+Celebration'
+                }
+            ];
+        }
+        return photos;
+    }
+
+    clearEventPhotos() {
+        const db = this.getDatabase();
+        db.eventPhotos = [];
+        this.saveDatabase(db);
     }
 
     // ========== STATISTICS ==========

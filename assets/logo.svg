@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Bharath Nava Yuva Association logo">
+  <defs>
+    <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5B5FC7" />
+      <stop offset="100%" stop-color="#FF6B6B" />
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="56" fill="url(#logo-gradient)" />
+  <path d="M42 32h12c7.2 0 12 4.8 12 11.6 0 4.8-2.8 8.2-6.6 9.4v0.2c4 0.8 7 4 7 8.2 0 6.4-4.6 11.6-11.8 11.6H42V32zm12 8H46v10h8c3.6 0 5.8-1.6 5.8-4.8s-2.2-5.2-5.8-5.2zm0 18H46v10h8c4 0 6.2-1.8 6.2-5.4 0-3.6-2.2-4.6-6.2-4.6z" fill="#fff" />
+</svg>

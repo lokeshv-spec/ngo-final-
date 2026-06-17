@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#5B5FC7">
+    <meta name="description" content="BHARATH NAVA YUVA ASSOCIATION - Empowering Lives Through Action. Youth empowerment, education, and community development programs.">
     <title>BHARATH NAVA YUVA ASSOCIATION - Empowering Lives Through Action</title>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts: Poppins (body) + Playfair Display (headings) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Touch-friendly size for buttons on mobile */
+        @media (max-width: 768px) {
+            button, a[class*="btn"], input[type="button"], input[type="submit"] {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+    </style>
 </head>
 <body class="loading-active">
     <!-- LOADING INTRO -->
@@ -81,16 +94,18 @@
     <header id="header">
 
         <nav id="navbar">
-            <a id="logo" href="#" onclick="navigateTo('index'); return false;">BHARATH NAVA YUVA</a>
+            <a id="logo" href="#" onclick="navigateTo('index'); return false;">
+                <img src="logo-removebg-preview.png" alt="Bharath Nava Yuva Association logo" class="header-logo">
+                <span class="logo-text">BHARATH NAVA YUVA</span>
+            </a>
             <button id="mobile-toggle">☰</button>
             <ul id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="programs.html">Programs</a></li>
-                <li><a href="#events-section">Events</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="donate.html">Donate</a></li>
                 <li><a href="volunteer.html">Volunteer</a></li>
-                <li><a href="transparency.html">Transparency</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -101,6 +116,10 @@
 
     <!-- HERO SECTION WITH INTRO (SHAKTI STYLE) -->
     <section id="hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto">
+            <source src="./hero vedio.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <div class="hero-background"></div>
         <div class="hero-content">
             <!-- TAGLINE -->
@@ -115,7 +134,7 @@
             <!-- PLAY VIDEO & INFO -->
             <div class="hero-bottom">
                 <div class="hero-video-button">
-                    <a href="https://www.youtube.com/watch?v=example" class="video-play-btn" target="_blank">
+                    <a href="https://youtu.be/mZXetb1TPEg?si=iSNnN8OGCv2M4RCX" class="video-play-btn" target="_blank">
                         <span class="play-icon">▶</span>
                     </a>
                     <span class="video-text">Play Video</span>
@@ -215,7 +234,9 @@
         <p class="section-intro">Helping people through focused, impactful initiatives</p>
         <div id="programs-grid">
             <div id="program-card">
-                <div class="program-image">🎓</div>
+                <div class="program-image">
+                    <img src="./assets/" alt="Education program" loading="lazy">
+                </div>
                 <div id="program-content">
                     <h3 id="program-name">Education & Skill Development</h3>
                     <p id="program-description">Providing scholarships, vocational training, and digital literacy programs to underprivileged youth.</p>
@@ -224,7 +245,9 @@
             </div>
 
             <div id="program-card">
-                <div class="program-image">💪</div>
+                <div class="program-image">
+                    <img src="./assets/" alt="Youth empowerment" loading="lazy">
+                </div>
                 <div id="program-content">
                     <h3 id="program-name">Youth Empowerment</h3>
                     <p id="program-description">Leadership programs, mentorship, and entrepreneurship support to transform young lives.</p>
@@ -233,7 +256,9 @@
             </div>
 
             <div id="program-card">
-                <div class="program-image">🏥</div>
+                <div class="program-image">
+                    <img src="./assets/" alt="Community health" loading="lazy">
+                </div>
                 <div id="program-content">
                     <h3 id="program-name">Community Health & Wellness</h3>
                     <p id="program-description">Healthcare awareness, medical camps, and wellness programs for underserved communities.</p>

@@ -10,15 +10,18 @@
     <!-- HEADER & NAVIGATION -->
     <header id="header">
         <nav id="navbar">
-            <a id="logo" href="index.html">BHARATH NAVA YUVA</a>
+            <a id="logo" href="index.html">
+                <img src="logo-removebg-preview.png" alt="Bharath Nava Yuva Association logo" class="header-logo">
+                <span class="logo-text">BHARATH NAVA YUVA</span>
+            </a>
             <button id="mobile-toggle">☰</button>
             <ul id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="programs.html">Programs</a></li>
+                 <li><a href="./gallery.html">Gallery</a></li>
                 <li><a href="donate.html">Donate</a></li>
                 <li><a href="volunteer.html">Volunteer</a></li>
-                <li><a href="transparency.html">Transparency</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -26,6 +29,11 @@
 
     <!-- HERO SECTION -->
     <section id="hero">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+            <source src="hero-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-background"></div>
         <h1 id="hero-title">Our Programs</h1>
         <p id="hero-subtitle">Creating lasting change in education, empowerment, and health</p>
     </section>
@@ -34,7 +42,7 @@
     <section id="programs-section">
         <!-- PROGRAM 1: EDUCATION SUPPORT -->
         <div style="margin-bottom: 4rem; padding: 2rem; background-color: #f5f5f5; border-radius: 8px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+            <div class="program-card-layout">
                 <div>
                     <h2 id="section-title" style="text-align: left; font-size: 2rem;">📚 Education Support</h2>
                     <p style="margin-bottom: 1rem; line-height: 1.8;">Our Education Support program aims to break the cycle of poverty through quality education. We provide scholarships, learning materials, and mentorship to underprivileged children in rural areas.</p>
@@ -70,7 +78,7 @@
 
         <!-- PROGRAM 2: WOMEN EMPOWERMENT -->
         <div style="margin-bottom: 4rem; padding: 2rem; background-color: #f5f5f5; border-radius: 8px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+            <div class="program-card-layout">
                 <div>
                     <h2 id="section-title" style="text-align: left; font-size: 2rem;">👩‍💼 Women Empowerment</h2>
                     <p style="margin-bottom: 1rem; line-height: 1.8;">We believe in empowering women to become economically independent and socially confident. Our program provides vocational training, microfinance support, and business development guidance.</p>
@@ -106,7 +114,7 @@
 
         <!-- PROGRAM 3: COMMUNITY HEALTH -->
         <div style="margin-bottom: 2rem; padding: 2rem; background-color: #f5f5f5; border-radius: 8px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+            <div class="program-card-layout">
                 <div>
                     <h2 id="section-title" style="text-align: left; font-size: 2rem;">🏥 Community Health</h2>
                     <p style="margin-bottom: 1rem; line-height: 1.8;">Access to healthcare is a fundamental right. We organize medical camps, health awareness sessions, and provide basic medical support to remote communities with limited healthcare infrastructure.</p>
