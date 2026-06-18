@@ -1,5 +1,35 @@
 // ========== SHARED UTILITIES ==========
 
+function scrollToPageTop() {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto'
+    });
+}
+
+function initPageTopScroll() {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    if (window.location.hash) {
+        return;
+    }
+
+    scrollToPageTop();
+    window.requestAnimationFrame(scrollToPageTop);
+    window.addEventListener('load', () => {
+        scrollToPageTop();
+        window.setTimeout(scrollToPageTop, 0);
+    }, { once: true });
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            scrollToPageTop();
+        }
+    });
+}
+
 function initLoadingIntro() {
     const loader = document.getElementById('loading-spinner');
     if (!loader) {
@@ -12,17 +42,16 @@ function initLoadingIntro() {
     const isReload = navigationEntry && navigationEntry.type === 'reload';
     const hasSeenLoader = sessionStorage.getItem('homeLoaderSeen') === 'true';
     const shouldShowLoader = isHomePage && (!hasSeenLoader || isReload);
-    const scrollToHero = () => {
-        const hero = document.getElementById('hero');
-        if (hero) {
-            hero.scrollIntoView({ block: 'start' });
+    const scrollToStart = () => {
+        if (!window.location.hash) {
+            scrollToPageTop();
         }
     };
 
     if (!shouldShowLoader) {
         loader.classList.add('fade-out');
         document.body.classList.remove('loading-active');
-        scrollToHero();
+        scrollToStart();
         window.setTimeout(() => {
             window.dispatchEvent(new CustomEvent('homeLoaderComplete'));
         }, 500);
@@ -36,7 +65,7 @@ function initLoadingIntro() {
             loader.classList.add('fade-out');
             document.body.classList.remove('loading-active');
             sessionStorage.setItem('homeLoaderSeen', 'true');
-            scrollToHero();
+            scrollToStart();
             window.dispatchEvent(new CustomEvent('homeLoaderComplete'));
         }, 10000);
     };
@@ -162,25 +191,6 @@ function initBelCupPopup() {
     });
 }
 
-function scrollToHeroSection() {
-    const hero = document.getElementById('hero');
-    if (hero) {
-        hero.scrollIntoView({ block: 'start' });
-    }
-}
-
-function initReloadHeroScroll() {
-    const navigationEntry = performance.getEntriesByType('navigation')[0];
-    const isReload = navigationEntry && navigationEntry.type === 'reload';
-    const hasLoader = Boolean(document.getElementById('loading-spinner'));
-
-    if (!isReload || hasLoader) {
-        return;
-    }
-
-    window.setTimeout(scrollToHeroSection, 0);
-}
-
 // Navigate to different pages
 function navigateTo(page) {
     window.location.href = `${page}.html`;
@@ -190,19 +200,45 @@ function navigateTo(page) {
 function initMobileMenu() {
     const toggle = document.getElementById('mobile-toggle');
     const navLinks = document.getElementById('nav-links');
-    
-    if (toggle) {
+
+    if (toggle && navLinks) {
+        toggle.setAttribute('aria-label', 'Toggle navigation menu');
+        toggle.setAttribute('aria-controls', 'nav-links');
+        toggle.setAttribute('aria-expanded', 'false');
+
+        const closeMenu = () => {
+            navLinks.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+        };
+
         toggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
+            const isOpen = navLinks.classList.toggle('active');
+            toggle.setAttribute('aria-expanded', String(isOpen));
         });
-    }
-    
-    // Close menu when link is clicked
-    if (navLinks) {
+
+        document.addEventListener('click', function(event) {
+            if (!navLinks.classList.contains('active')) {
+                return;
+            }
+
+            const clickedInsideMenu = navLinks.contains(event.target);
+            const clickedToggle = toggle.contains(event.target);
+            if (!clickedInsideMenu && !clickedToggle) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        // Close menu when link is clicked
         const links = navLinks.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
+                closeMenu();
             });
         });
     }
@@ -385,9 +421,9 @@ function showMessage(message, type = 'success') {
 
 // Initialize page on load
 document.addEventListener('DOMContentLoaded', function() {
+    initPageTopScroll();
     initBelCupPopup();
     initLoadingIntro();
-    initReloadHeroScroll();
     initMobileMenu();
     initSmoothScroll();
     initEventGallery();

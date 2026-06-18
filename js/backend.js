@@ -6,6 +6,7 @@
 class Backend {
     constructor() {
         this.initializeDatabase();
+        this.migrateLegacyVolunteers();
     }
 
     initializeDatabase() {
@@ -23,6 +24,31 @@ class Backend {
                 }
             }));
         }
+    }
+
+    migrateLegacyVolunteers() {
+        const legacyVolunteers = JSON.parse(localStorage.getItem('volunteers') || '[]');
+        if (!legacyVolunteers.length) {
+            return;
+        }
+
+        const db = this.getDatabase();
+        const existingKeys = new Set((db.volunteers || []).map(v => `${v.email || ''}|${v.phone || ''}|${v.registeredAt || v.timestamp || ''}`));
+        legacyVolunteers.forEach(volunteer => {
+            const registeredAt = volunteer.registeredAt || volunteer.timestamp || new Date().toISOString();
+            const key = `${volunteer.email || ''}|${volunteer.phone || ''}|${registeredAt}`;
+            if (!existingKeys.has(key)) {
+                db.volunteers.push({
+                    id: volunteer.id || Date.now().toString() + Math.random().toString(36).slice(2, 7),
+                    ...volunteer,
+                    status: volunteer.status || 'pending',
+                    registeredAt: registeredAt
+                });
+                existingKeys.add(key);
+            }
+        });
+        this.saveDatabase(db);
+        localStorage.removeItem('volunteers');
     }
 
     getDatabase() {

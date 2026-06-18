@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./WhatsApp Image 2026-06-18 at 8.40.15 PM.jpeg" type="image/x-icon">
+     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>Admin Dashboard - BHARATH NAVA YUVA ASSOCIATION</title>
     <style>
         * {
@@ -387,6 +389,16 @@
             if (tabName === 'console') loadConsole();
         }
 
+        function escapeHtml(value) {
+            return String(value || '').replace(/[&<>"']/g, character => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[character]));
+        }
+
         function loadVolunteers() {
             const volunteers = backend.getVolunteers();
             const html = volunteers.length > 0 
@@ -396,22 +408,36 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Location</th>
                             <th>Skills</th>
+                            <th>Availability</th>
                             <th>Status</th>
                             <th>Registered</th>
                         </tr>
                     </thead>
                     <tbody>
-                        ${volunteers.map(v => `
+                        ${volunteers.map(v => {
+                            const registeredDate = v.registeredAt || v.timestamp || v.submittedAt || new Date().toISOString();
+                            return `
                             <tr>
-                                <td>${v.name}</td>
-                                <td>${v.email}</td>
-                                <td>${v.phone}</td>
-                                <td>${v.skills}</td>
-                                <td><span style="background: ${v.status === 'approved' ? '#4caf50' : '#ff9800'}; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem;">${v.status}</span></td>
-                                <td>${new Date(v.timestamp).toLocaleDateString()}</td>
+                                <td>${escapeHtml(v.name)}</td>
+                                <td>${escapeHtml(v.email)}</td>
+                                <td>${escapeHtml(v.phone)}</td>
+                                <td>${escapeHtml(v.location || '-')}</td>
+                                <td>${escapeHtml(v.skills || '-')}</td>
+                                <td>${escapeHtml(v.availability || '-')}</td>
+                                <td><span style="background: ${v.status === 'approved' ? '#4caf50' : '#ff9800'}; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.85rem;">${escapeHtml(v.status || 'pending')}</span></td>
+                                <td>${new Date(registeredDate).toLocaleDateString()}</td>
                             </tr>
-                        `).join('')}
+                            ${v.experience || v.motivation ? `
+                                <tr>
+                                    <td colspan="8" style="background: #fafafa; color: #555; font-size: 0.9rem;">
+                                        <strong>Experience:</strong> ${escapeHtml(v.experience || '-')}<br>
+                                        <strong>Motivation:</strong> ${escapeHtml(v.motivation || '-')}
+                                    </td>
+                                </tr>
+                            ` : ''}`;
+                        }).join('')}
                     </tbody>
                 </table>`
                 : '<div id="empty-state">No volunteer registrations yet</div>';
@@ -581,7 +607,7 @@
                 html += `<div class="log-line">${log}</div>`;
             });
             html += '</div>';
-            document.querySelectorAll('#tab-content')[4].innerHTML = `<h2 style="margin-bottom: 1rem; color: #00796B;">Developer Console</h2>${html}`;
+            document.querySelectorAll('#tab-content')[5].innerHTML = `<h2 style="margin-bottom: 1rem; color: #00796B;">Developer Console</h2>${html}`;
         }
 
         function updateStats() {

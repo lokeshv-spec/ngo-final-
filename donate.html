@@ -13,22 +13,30 @@
             <a id="logo" href="index.html">
                 <img src="logo-removebg-preview.png" alt="Bharath Nava Yuva Association logo" class="header-logo">
                 <span class="logo-text">BHARATH NAVA YUVA</span>
+     <link rel="icon" href="./WhatsApp Image 2026-06-18 at 8.40.15 PM.jpeg" type="image/x-icon">
+     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
             </a>
-            <button id="mobile-toggle">☰</button>
+            <button id="mobile-toggle" type="button" aria-label="Toggle navigation menu" aria-controls="nav-links" aria-expanded="false">☰</button>
             <ul id="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="programs.html">Programs</a></li>
-                 <li><a href="./gallery.html">Gallery</a></li>
-                <li><a href="donate.html">Donate</a></li>
-                <li><a href="volunteer.html">Volunteer</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="programs.html">Program</a></li>
+                <li><a href="refund.html">Refund</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="volunteer.html">Volunteer</a></li>
             </ul>
+        </nav>
+             <nav id="navbar1">
+          <marquee> Important update: BHARATH NAVA YUVA ASSOCIATION started in 2026 | Upcoming event: BEL Cup 2026 - 21 June | Benaka Sports Line | Register: <a href="https://belcup.netlify.app/" target="_blank" rel="noopener">belcup.netlify.app</a> </marquee>  
         </nav>
     </header>
 
     <!-- HERO SECTION -->
-    <section id="hero">
+    <section id="hero" class="image-hero">
         <video class="hero-video" autoplay muted loop playsinline preload="metadata">
             <source src="hero-video.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -49,10 +57,10 @@
 
             <!-- Fixed Amounts -->
             <div id="donation-amounts">
-                <button id="amount-btn" class="amount-btn" data-amount="500">₹500</button>
-                <button id="amount-btn" class="amount-btn" data-amount="1000">₹1000</button>
-                <button id="amount-btn" class="amount-btn" data-amount="2500">₹2500</button>
-                <button id="amount-btn" class="amount-btn" data-amount="custom" onclick="toggleCustomAmount()">Other</button>
+                <button id="amount-btn" class="amount-btn" type="button" data-amount="500">₹500</button>
+                <button id="amount-btn" class="amount-btn" type="button" data-amount="1000">₹1000</button>
+                <button id="amount-btn" class="amount-btn" type="button" data-amount="2500">₹2500</button>
+                <button id="amount-btn" class="amount-btn" type="button" data-amount="custom" onclick="toggleCustomAmount()">Other</button>
             </div>
 
             <!-- Custom Amount -->
@@ -149,7 +157,7 @@
                 <h3 id="footer-section-title">Quick Links</h3>
                 <ul id="footer-links">
                     <li><a href="about.html">About Us</a></li>
-                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="programs.html">Program</a></li>
                     <li><a href="transparency.html">Transparency</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -180,6 +188,16 @@
     <script src="js/shared.js"></script>
     <script>
         let selectedAmount = 500;
+        const amountDisplay = document.getElementById('selected-amount-display');
+        const razorpayAmount = document.getElementById('razorpay-amount');
+        const customAmountContainer = document.getElementById('custom-amount-container');
+        const customAmountInput = document.getElementById('custom-amount-input');
+
+        function setSelectedAmount(amount) {
+            selectedAmount = amount;
+            amountDisplay.textContent = '₹' + selectedAmount;
+            razorpayAmount.textContent = '₹' + selectedAmount;
+        }
 
         // Select donation amount
         document.querySelectorAll('.amount-btn').forEach(btn => {
@@ -187,9 +205,9 @@
                 if (this.dataset.amount !== 'custom') {
                     document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
                     this.classList.add('selected');
-                    selectedAmount = parseInt(this.dataset.amount);
-                    document.getElementById('custom-amount-container').style.display = 'none';
-                    document.getElementById('selected-amount-display').textContent = '₹' + selectedAmount;
+                    customAmountContainer.style.display = 'none';
+                    customAmountInput.value = '';
+                    setSelectedAmount(parseInt(this.dataset.amount, 10));
                 }
             });
         });
@@ -199,25 +217,42 @@
 
         // Toggle custom amount
         function toggleCustomAmount() {
-            const container = document.getElementById('custom-amount-container');
-            container.style.display = container.style.display === 'none' ? 'block' : 'none';
-            if (container.style.display === 'block') {
-                document.getElementById('custom-amount-input').focus();
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+            document.querySelector('.amount-btn[data-amount="custom"]').classList.add('selected');
+            customAmountContainer.style.display = 'block';
+            customAmountInput.focus();
+
+            const customAmount = parseInt(customAmountInput.value, 10);
+            if (customAmount && customAmount > 0) {
+                setSelectedAmount(customAmount);
+            } else {
+                amountDisplay.textContent = 'Enter custom amount';
+                razorpayAmount.textContent = 'Enter custom amount';
             }
         }
+
+        customAmountInput.addEventListener('input', function() {
+            const customAmount = parseInt(this.value, 10);
+            if (customAmount && customAmount > 0) {
+                setSelectedAmount(customAmount);
+            } else {
+                amountDisplay.textContent = 'Enter custom amount';
+                razorpayAmount.textContent = 'Enter custom amount';
+            }
+        });
 
         // Submit donation form
         function submitDonation(event) {
             event.preventDefault();
 
             // Get custom amount if selected
-            if (document.getElementById('custom-amount-container').style.display !== 'none') {
-                const customAmount = parseInt(document.getElementById('custom-amount-input').value);
+            if (customAmountContainer.style.display !== 'none') {
+                const customAmount = parseInt(customAmountInput.value, 10);
                 if (!customAmount || customAmount < 1) {
                     showMessage('Please enter a valid amount', 'error');
                     return;
                 }
-                selectedAmount = customAmount;
+                setSelectedAmount(customAmount);
             }
 
             // Validate form
@@ -252,8 +287,7 @@
             localStorage.setItem('donations', JSON.stringify(donations));
 
             // Update display
-            document.getElementById('selected-amount-display').textContent = '₹' + selectedAmount;
-            document.getElementById('razorpay-amount').textContent = '₹' + selectedAmount;
+            setSelectedAmount(selectedAmount);
             
             document.getElementById('donation-form').style.display = 'none';
             document.getElementById('razorpay-container').style.display = 'block';

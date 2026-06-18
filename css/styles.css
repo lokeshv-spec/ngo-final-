@@ -185,8 +185,9 @@ body.loading-active {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: clamp(0.75rem, 3vw, 1rem) clamp(1rem, 5vw, 2rem);
-    max-width: 1200px;
+    gap: 1rem;
+    padding: clamp(0.75rem, 3vw, 1rem) clamp(1rem, 4vw, 2rem);
+    max-width: 1440px;
     margin: 0 auto;
     width: 100%;
 }
@@ -195,11 +196,12 @@ body.loading-active {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 1.8rem;
+    font-size: clamp(1.05rem, 2.2vw, 1.8rem);
     font-weight: bold;
     color: var(--primary-teal);
     text-decoration: none;
     line-height: 1.1;
+    flex-shrink: 0;
 }
 
 #logo .header-logo {
@@ -437,14 +439,17 @@ body.loading-active {
 
 #nav-links {
     display: flex;
-    gap: 2rem;
+    gap: clamp(0.55rem, 1.5vw, 1.35rem);
     list-style: none;
+    align-items: center;
 }
 
 #nav-links a {
     text-decoration: none;
     color: var(--dark-gray);
     font-weight: 500;
+    font-size: clamp(0.82rem, 0.95vw, 1rem);
+    white-space: nowrap;
     transition: color 0.3s ease;
 }
 
@@ -463,9 +468,61 @@ body.loading-active {
     min-width: 44px;
     min-height: 44px;
     border-radius: 8px;
-    display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 767px) {
+    #navbar {
+        position: relative;
+        gap: 1rem;
+    }
+
+    #logo {
+        max-width: calc(100% - 60px);
+        min-width: 0;
+        font-size: clamp(0.95rem, 4vw, 1.25rem);
+    }
+
+    #logo .logo-text {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    #nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0;
+        background-color: var(--white);
+        border-top: 1px solid var(--border-gray);
+        box-shadow: 0 16px 28px rgba(32, 33, 36, 0.16);
+        z-index: 1001;
+    }
+
+    #nav-links.active {
+        display: flex;
+    }
+
+    #nav-links li {
+        width: 100%;
+    }
+
+    #nav-links a {
+        display: block;
+        width: 100%;
+        padding: 0.95rem 1.25rem;
+        font-size: 0.98rem;
+    }
+
+    #mobile-toggle {
+        display: inline-flex;
+        flex-shrink: 0;
+    }
 }
 
 /* ========== HERO SECTION ========== */
@@ -482,6 +539,39 @@ body.loading-active {
     align-items: center;
     position: relative;
     overflow: hidden;
+}
+
+#hero.image-hero {
+    background:
+        linear-gradient(180deg, rgba(3, 22, 18, 0.66), rgba(3, 22, 18, 0.72)),
+        url("../Natural Bangladesh 🇧🇩.jpeg") center / cover no-repeat;
+}
+
+#hero.image-hero .hero-video {
+    display: none;
+}
+
+#hero.image-hero .hero-background {
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 48%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.38));
+}
+
+#hero.image-hero #hero-title,
+#hero.image-hero #hero-subtitle {
+    position: relative;
+    z-index: 2;
+    color: #fff8d9;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.92);
+}
+
+#hero.image-hero #hero-title {
+    font-weight: 900;
+}
+
+#hero.image-hero #hero-subtitle {
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .hero-video {
@@ -1327,10 +1417,17 @@ h1, h2, h3, h4, h5 {
     color: #555;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 980px) {
     .team-layout {
         grid-template-columns: 1fr;
     }
+}
+
+@media (max-width: 480px) {
+    .team-member {
+        align-items: flex-start;
+    }
+
     .member-photo {
         width: 100px;
         height: 110px;
@@ -2505,7 +2602,7 @@ h1, h2, h3, h4, h5 {
     #nav-links {
         display: flex;
         position: static;
-        gap: 2rem;
+        gap: clamp(0.55rem, 1.5vw, 1.35rem);
         list-style: none;
         background-color: transparent;
         box-shadow: none;
@@ -2530,13 +2627,13 @@ h1, h2, h3, h4, h5 {
     }
 
     #logo {
-        font-size: 1.8rem;
+        font-size: clamp(1.05rem, 2.2vw, 1.8rem);
     }
 
     #nav-links {
         display: flex;
         position: static;
-        gap: 2rem;
+        gap: clamp(0.55rem, 1.5vw, 1.35rem);
     }
 
     #mobile-toggle {
@@ -2577,5 +2674,57 @@ h1, h2, h3, h4, h5 {
 
     .mission-list {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1099px) {
+    #navbar {
+        position: relative;
+        gap: 1rem;
+    }
+
+    #logo {
+        max-width: calc(100% - 60px);
+        min-width: 0;
+    }
+
+    #logo .logo-text {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    #nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0;
+        background-color: var(--white);
+        border-top: 1px solid var(--border-gray);
+        box-shadow: 0 16px 28px rgba(32, 33, 36, 0.16);
+        z-index: 1001;
+    }
+
+    #nav-links.active {
+        display: flex;
+    }
+
+    #nav-links li {
+        width: 100%;
+    }
+
+    #nav-links a {
+        display: block;
+        width: 100%;
+        padding: 0.95rem 1.25rem;
+        font-size: 0.98rem;
+    }
+
+    #mobile-toggle {
+        display: inline-flex;
+        flex-shrink: 0;
     }
 }
